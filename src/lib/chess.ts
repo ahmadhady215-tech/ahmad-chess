@@ -1,5 +1,4 @@
-import { Chess } from "chess.js"
-
+// Fixed imports
 import { Chess, Move, Square } from 'chess.js'
 
 export class ChessGame {
