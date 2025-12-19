@@ -394,7 +394,7 @@ http://localhost:3000
 5. **Test the application!**
 
 ### Soon
-1. Deploy to Vercel (see DEPLOYMENT.md)
+1. Deploy to production (see DEPLOYMENT.md)
 2. Add custom domain
 3. Configure Google OAuth
 4. Invite users to test

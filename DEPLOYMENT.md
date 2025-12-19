@@ -1,13 +1,8 @@
 # 🚢 Deployment Guide
 
-## Deploying to Vercel (Recommended)
+## Deploying to Netlify (Recommended)
 
-Vercel is the recommended platform as it's made by the Next.js team.
-
-### Prerequisites
-- GitHub account
-- Vercel account (free at [vercel.com](https://vercel.com))
-- Code pushed to GitHub repository
+Netlify provides excellent support for Next.js applications with automated builds and global distribution.
 
 ### Step-by-Step
 
@@ -21,71 +16,21 @@ Vercel is the recommended platform as it's made by the Next.js team.
    git push -u origin main
    ```
 
-2. **Import to Vercel**
-   - Go to [vercel.com](https://vercel.com)
-   - Click "Add New Project"
+2. **Import to Netlify**
+   - Go to [netlify.com](https://netlify.com)
+   - Click "Add New Site" -> "Import an existing project"
    - Import your GitHub repository
-   - Vercel will auto-detect Next.js
+   - Netlify will auto-detect Next.js settings
 
 3. **Configure Environment Variables**
-   - In project settings, go to "Environment Variables"
+   - In site settings, go to "Environment variables"
    - Add:
-     ```
-     NEXT_PUBLIC_SUPABASE_URL = your_production_supabase_url
-     NEXT_PUBLIC_SUPABASE_ANON_KEY = your_production_anon_key
-     ```
-   - Click "Save"
+     - `NEXT_PUBLIC_SUPABASE_URL`
+     - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 
 4. **Deploy**
-   - Click "Deploy"
-   - Wait 2-3 minutes
-   - Your site is live! 🎉
-
-5. **Configure Domain (Optional)**
-   - Go to Settings → Domains
-   - Add your custom domain
-   - Update DNS records as instructed
-
-### Automatic Deployments
-
-Every push to `main` branch will automatically deploy:
-```bash
-git add .
-git commit -m "Update feature"
-git push
-# Vercel automatically deploys!
-```
-
-## Deploying to Netlify
-
-### Setup
-
-1. **Build Settings**
-   ```
-   Build command: npm run build
-   Publish directory: .next
-   ```
-
-2. **Environment Variables**
-   - Add the same Supabase credentials
-   - NEXT_PUBLIC_SUPABASE_URL
-   - NEXT_PUBLIC_SUPABASE_ANON_KEY
-
-3. **Deploy**
-   - Connect GitHub repository
    - Click "Deploy site"
-
-### netlify.toml (Optional)
-
-Create `netlify.toml`:
-```toml
-[build]
-  command = "npm run build"
-  publish = ".next"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-```
+   - Your site will be live on a generated subdomain!
 
 ## Deploying to Railway
 
@@ -187,7 +132,6 @@ docker-compose up -d
 - [ ] OAuth redirect URLs updated
 
 ### Performance
-- [ ] Enable Vercel Analytics (optional)
 - [ ] Configure CDN for static assets
 - [ ] Enable gzip/brotli compression
 - [ ] Set up monitoring (Sentry, LogRocket, etc.)
@@ -201,51 +145,7 @@ docker-compose up -d
 - [ ] Set up database backups
 - [ ] Enable Connection Pooling if needed
 
-### Domain Configuration
-
-If using custom domain:
-
-1. **Add to Vercel**
-   - Settings → Domains
-   - Add your domain
-   - Get DNS records
-
-2. **Update DNS**
-   ```
-   Type: A
-   Name: @
-   Value: 76.76.21.21
-
-   Type: CNAME
-   Name: www
-   Value: cname.vercel-dns.com
-   ```
-
-3. **Update Supabase**
-   - Add production URL to allowed redirect URLs
-   - Update OAuth providers with new domain
-
 ## Monitoring & Analytics
-
-### Vercel Analytics (Built-in)
-```bash
-# Install
-npm install @vercel/analytics
-
-# Add to layout.tsx
-import { Analytics } from '@vercel/analytics/react'
-
-export default function RootLayout({ children }) {
-  return (
-    <html>
-      <body>
-        {children}
-        <Analytics />
-      </body>
-    </html>
-  )
-}
-```
 
 ### Error Tracking with Sentry
 
@@ -253,7 +153,7 @@ export default function RootLayout({ children }) {
 npm install @sentry/nextjs
 
 # Follow setup wizard
-npx @sentry/wizard -i nextjs
+npx @sentry/wizard - i nextjs
 ```
 
 ## CI/CD Pipeline
@@ -291,56 +191,7 @@ jobs:
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
-        
-      - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v20
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.ORG_ID }}
-          vercel-project-id: ${{ secrets.PROJECT_ID }}
 ```
-
-## Performance Optimization
-
-### Next.js Config
-
-```javascript
-// next.config.js
-module.exports = {
-  reactStrictMode: true,
-  swcMinify: true,
-  images: {
-    domains: ['your-supabase-project.supabase.co'],
-    formats: ['image/avif', 'image/webp'],
-  },
-  compress: true,
-  poweredByHeader: false,
-}
-```
-
-### Caching Strategy
-
-```javascript
-// Enable static generation where possible
-export const revalidate = 60 // ISR: revalidate every 60 seconds
-```
-
-## Scaling Considerations
-
-### Database
-- Upgrade Supabase tier as needed
-- Enable connection pooling (PgBouncer)
-- Add read replicas for scaling reads
-- Monitor query performance
-
-### CDN
-- Use Vercel's Edge Network (automatic)
-- Or CloudFlare CDN for additional caching
-
-### WebSocket Scaling
-- Supabase Realtime scales automatically
-- Monitor concurrent connections
-- Consider connection limits per plan
 
 ## Troubleshooting Deployment
 
@@ -348,14 +199,11 @@ export const revalidate = 60 // ISR: revalidate every 60 seconds
 ```bash
 # Check build locally first
 npm run build
-
-# Check logs in Vercel dashboard
 ```
 
 ### Environment variables not working
 - Redeploy after adding variables
 - Check variable names match exactly
-- No quotes needed in Vercel UI
 
 ### Database connection issues
 - Verify Supabase project URL is correct
@@ -364,7 +212,6 @@ npm run build
 
 ## Support
 
-- Vercel: [vercel.com/support](https://vercel.com/support)
 - Supabase: [supabase.com/docs](https://supabase.com/docs)
 - Issues: Open a GitHub issue
 

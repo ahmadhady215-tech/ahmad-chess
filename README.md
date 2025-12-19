@@ -203,16 +203,7 @@ npm run type-check
 
 ## 🚢 Deployment
 
-### Vercel (Recommended)
-
-1. Push code to GitHub
-2. Import project in Vercel
-3. Add environment variables
-4. Deploy
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
-
-### Alternative Platforms
+### Platform Recommendations
 - Netlify
 - Railway
 - Cloudflare Pages

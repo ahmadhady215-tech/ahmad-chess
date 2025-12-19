@@ -61,8 +61,8 @@ Welcome to the **Aether-Board** documentation! This index will help you navigate
 **Going to production:**
 
 9. **[DEPLOYMENT.md](./DEPLOYMENT.md)**
-   - Vercel deployment (recommended)
-   - Alternative platforms
+   - Production deployment
+   - Platform recommendations
    - Docker setup
    - CI/CD pipeline
    - Performance optimization
@@ -180,7 +180,6 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ### Useful Links
 
 - **Supabase Dashboard**: https://app.supabase.com
-- **Vercel Dashboard**: https://vercel.com/dashboard
 - **Next.js Docs**: https://nextjs.org/docs
 - **Supabase Docs**: https://supabase.com/docs
 - **Tailwind Docs**: https://tailwindcss.com/docs
