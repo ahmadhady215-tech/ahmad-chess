@@ -65,7 +65,7 @@ export class RealtimeService {
             })
             .on('presence', { event: 'sync' }, () => {
                 const state = channel.presenceState()
-                const presenceList: GamePresence[] = Object.values(state).flat() as GamePresence[]
+                const presenceList = Object.values(state).flat() as unknown as GamePresence[]
                 onPresence(presenceList)
             })
             .subscribe((status) => {
