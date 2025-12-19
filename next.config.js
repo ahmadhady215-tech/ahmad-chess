@@ -6,7 +6,6 @@ const nextConfig = {
     },
     // Enable experimental features for better performance
     experimental: {
-        serverActions: true,
     },
 }
 
