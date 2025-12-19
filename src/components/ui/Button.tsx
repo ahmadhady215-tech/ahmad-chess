@@ -38,7 +38,9 @@ export function Button({
             disabled={disabled || isLoading}
             whileHover={{ scale: disabled || isLoading ? 1 : 1.05 }}
             whileTap={{ scale: disabled || isLoading ? 1 : 0.95 }}
-            {...props}
+            onClick={props.onClick}
+            type={props.type}
+            id={props.id}
         >
             {isLoading ? (
                 <span className="flex items-center justify-center gap-2">
